@@ -12,7 +12,7 @@ Pixup helps you find and download google images by simply specifying your query 
 3. Open the console at a choosen location and run the commmand: 💻 
 - ```git clone https://github.com/Tirbo06/PIXUP```
 
-4.Then switch to the directory you just downloaded (pixup) with the command: 📁
+4. Then switch to the directory you just downloaded (pixup) with the command: 📁
 - ```cd pixup```
 
 7. Install the project's dependencies with: 🛠
