@@ -54,12 +54,11 @@ def multiple_save_list_of_images(skus_csv, save_to_path):
         links = get_images_urls(list_of_skus[i])
        
         if not list_of_skus[i] in os.listdir(save_to_path):
-            os.mkdir(save_to_path+'\\'+list_of_skus[i])
-            # os.mkdir(os.path.join(save_to_path, list_of_skus[i]))
+            os.mkdir(os.path.join(save_to_path, list_of_skus[i]))
             
         for j in range(len(links)):
             f = open(f"{save_to_path}/{list_of_skus[i]}/{list_of_skus[i]}-{j}.jpg", "wb")
-            f.write(requests.get(links[i]).content)
+            f.write(requests.get(links[j]).content)
             f.close()
     
     return f'\nSuccessfully saved images to {save_to_path}'
@@ -86,13 +85,16 @@ if __name__ == "__main__":
             print(f'Saving images to destination folder:\n {save_to_path}')
         except:
             print('Error in the destination folder path. Please double check and try again')
+            print('Images will be saved at file\'s location')
+            save_to_path = os.getcwd()
     
     
     # SINGLE OR MULTIPLE
     print('-'*n_layout)
-    single_or_multiple = input("Are you looking for a single image product or for multiple images products?")
+    single_or_multiple = input("Are you looking for a single product or for multiple products?\n")
     print('-'*n_layout)
     while single_or_multiple not in ['single', 'multiple']:
+        print('-'*n_layout)
         single_or_multiple = input("Not sure to understand your answer. Please respond with 'single' or 'multiple' and then hit 'Enter'.\nAre you looking for a single image product or for multiple images products?\n")
     
     if single_or_multiple == 'single':    
@@ -112,10 +114,14 @@ if __name__ == "__main__":
         print('-'*n_layout)
         list_skus = input("Insert your SKU list full path name, as a .csv file with 1 column\n")
         print('-'*n_layout)
+        try:
+            pd.read_csv(list_skus)
+        except:
+            print("Error with the file name path, please double check and try again")
+            exit(0)
+        
         multiple_save_list_of_images(list_skus, save_to_path)
 
-    # C:\Users\P-01\LOCAL_CODE_P01\SCRAPING\datas.csv
-    
     print('\n','#'*n_layout)
-    print('Program finished !')
+    print(' Program finished !')
 
