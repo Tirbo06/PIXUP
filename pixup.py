@@ -12,7 +12,7 @@ def get_images_urls(query):
     a soup in order to find the images and then extract links
     Return: List of google's icon image's link'''
     
-    url = f"https://www.google.com/search?q={query.replace(' ', '+')}&tbm=isch"
+    url = f"https://www.google.com/search?q={query.replace(' ', '+').replace('-', '+')}&tbm=isch"
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "lxml")
     images = soup.find_all("img")
