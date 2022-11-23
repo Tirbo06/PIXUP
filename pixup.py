@@ -12,7 +12,7 @@ def get_images_urls(query):
     a soup in order to find the images and then extract links
     Return: List of google's icon image's link'''
     
-    url = f"https://www.google.com/search?q={query.replace(' ', '+').replace('-', '+')}&tbm=isch"
+    url = f"https://www.google.com/search?q={query.replace(' ', '+')}&tbm=isch"
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "lxml")
     images = soup.find_all("img")
@@ -54,10 +54,10 @@ def multiple_save_list_of_images(skus_csv, save_to_path):
         links = get_images_urls(list_of_skus[i])
        
         if not list_of_skus[i] in os.listdir(save_to_path):
-            os.mkdir(os.path.join(save_to_path, list_of_skus[i]))
+            os.mkdir(os.path.join(save_to_path, list_of_skus[i].replace(' ', '_')))
             
         for j in range(len(links)):
-            f = open(f"{save_to_path}/{list_of_skus[i]}/{list_of_skus[i]}-{j}.jpg", "wb")
+            f = open(f"{save_to_path}/{list_of_skus[i].replace(' ', '_')}/{list_of_skus[i].replace(' ', '_')}-{j}.jpg", "wb")
             f.write(requests.get(links[j]).content)
             f.close()
     
