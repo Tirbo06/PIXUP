@@ -28,3 +28,4 @@ Pixup helps you find and download icon size google images by simply specifying y
 
 ### Disclaimer 🛑
 The images of Google Images are under specific copyrights laws and anybody must take it in consideration when using this service.
+YES
